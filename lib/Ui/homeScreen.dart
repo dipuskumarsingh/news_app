@@ -1,8 +1,10 @@
 
 
+import 'package:carousel_custom_slider/carousel_custom_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/Ui/accountScreen.dart';
 import 'package:news_app/Ui/discoverScreen.dart';
 import 'package:news_app/Ui/uiHelper/textWidget.dart';
 import 'package:news_app/bloc/news_bloc.dart';
@@ -33,7 +35,7 @@ class _homeScreenState extends State<homeScreen> {
       body: Column(
         children: [
           Expanded(
-              flex:2,
+              flex:3,
               child: Column(
                 children: [
                   Padding(
@@ -60,43 +62,37 @@ class _homeScreenState extends State<homeScreen> {
                     if(state is NewsLoadedState){
                       print("${state.newsData.results![0].title}");
                       return SizedBox(
-                        height: 250,
+                        height: 210,
                         width: double.infinity,
-                        child: ListView.builder(
+                        child: CarouselCustomSlider(
+                          sliderList: [
+                            state.newsData.results![0].image_url!,
+                            state.newsData.results![1].image_url!,
+                            state.newsData.results![2].image_url!,
+                            state.newsData.results![3].image_url!,
+                            state.newsData.results![4].image_url!,
+                            state.newsData.results![5].image_url!,
+                          ],
+                          borderRadius: BorderRadiusGeometry.circular(21),
+                          viewportFractionPaddingHorizontal: 10,
+                          effect: SwapEffect(
+                            dotHeight: 10,
+                            dotWidth: 10,
+                            paintStyle: PaintingStyle.stroke,
+                            activeDotColor: Colors.blue,
+                            dotColor: Colors.grey
+                          ),
+                        )
+                        /* ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: state.newsData.results!.length,
                             itemBuilder: (_,index){
-                          return Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            padding: EdgeInsets.only(left: 10,bottom: 5) ,
-                            width: 380,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(image: NetworkImage("${state.newsData.results![index].image_url != null ? state.newsData.results![index].image_url : Container()}"),fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(21),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CustomText(text: "${state.newsData.results![index].source_name}",fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold,),
-                                    /*Container(
-                                      width: 45,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(image: NetworkImage("${state.newsData.results![index].source_icon}"),fit: BoxFit.cover),
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                    )*/
-                                  ],
-                                ),
-                                CustomText(text: "${state.newsData.results![index].title}",fontSize: 21,color: Colors.white,fontWeight: FontWeight.bold,backgroundColor: Color(0xff333333),),
-                              ],
-                            ),
+                          return CarouselCustomSlider(
+                            sliderList:[ state.newsData.results![index].image_url!],
+                            borderRadius: BorderRadiusGeometry.circular(21),
+                            viewportFractionPaddingHorizontal: 10,
                           );
-                        }),
+                        }),*/
                       );
                     }
                     return Container();
@@ -104,7 +100,7 @@ class _homeScreenState extends State<homeScreen> {
                 ],
               )),
           Expanded(
-              flex:2,
+              flex:4,
               child: Column(
             children: [
               Padding(
@@ -129,13 +125,16 @@ class _homeScreenState extends State<homeScreen> {
                   return Center(child: Text("${state.errorMassage}"),);
                 }
                 if(state is NewsLoadedState){
-                  print("${state.newsData.results![0].title}");
                   return Expanded(
                     flex: 1,
                     child: ListView.builder(
                         itemCount: state.newsData.results!.length,
                         itemBuilder: (_,index){
+                          var newsData = state.newsData.results;
                           return ListTile(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> accountScreen(imgUrl: newsData![index].image_url,title: newsData![index].title,subTitle: newsData[index].description,time:state.newsData.results![index].pubDate,publisherImage: newsData[index].source_icon,publisherName: newsData[index].source_name,)));
+                            },
                             leading: Container(
                               width: 100,
                                 height: 100,

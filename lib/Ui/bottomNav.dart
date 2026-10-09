@@ -21,7 +21,6 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
     homeScreen(),
     discoverScreen(),
     bookmarkScreen(),
-    accountScreen(),
   ];
 
   @override
@@ -29,6 +28,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
     return Scaffold(
         body: screenNavigation [selectIndex],
         bottomNavigationBar: NavigationBar(
+          labelPadding: EdgeInsets.zero,
             destinations: [
               NavigationDestination(
                 selectedIcon:
@@ -55,14 +55,14 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
                       CustomText(text: " Save",)
                     ],
                   ), label: ""),
-              NavigationDestination(
+             /* NavigationDestination(
                 selectedIcon: Icon(Icons.person_2_outlined,color: Colors.white,),
                   icon: Row(
                     children: [
                       Icon(Icons.person_rounded),
                       CustomText(text: " Profile",)
                     ],
-                  ), label: ""),
+                  ), label: ""),*/
             ],
           height: 65,
           backgroundColor: Colors.white,

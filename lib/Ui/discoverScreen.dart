@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/Ui/accountScreen.dart';
 import 'package:news_app/Ui/uiHelper/textWidget.dart';
 import 'package:news_app/bloc/news_bloc.dart';
 class discoverScreen extends StatefulWidget{
@@ -142,6 +143,9 @@ class _discoverScreenState extends State<discoverScreen> {
                               itemCount: state.newsData.results!.length,
                               itemBuilder: (_,index){
                                 return ListTile(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>accountScreen(imgUrl: state.newsData.results![index].image_url,title: state.newsData.results![index].title,subTitle: state.newsData.results![index].description,time:state.newsData.results![index].pubDate,publisherImage: state.newsData.results![index].source_icon,publisherName: state.newsData.results![index].source_name,)));
+                                  },
                                   leading: Container(
                                     width: 100,
                                     height: 100,
