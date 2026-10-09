@@ -44,14 +44,14 @@ class _accountScreenState extends State<accountScreen> {
                        borderRadius: BorderRadius.circular(25)
                    ),
                    child: IconButton(onPressed: (){
-                    /* firestore.collection("newsData").add({
-                       "image" : "${state.newsData.results![0].image_url}",
-                       "source_icon" : "${state.newsData.results![0].source_icon}",
-                       "source_name" : "${state.newsData.results![0].source_name}",
-                       "pubDate" : "${state.newsData.results![0].pubDate}",
-                       "title" : "${state.newsData.results![0].title}",
-                       "description" : "${state.newsData.results![0].description}",
-                     });*/
+                     firestore.collection("newsData").add({
+                       "image" : "${widget.imgUrl}",
+                       "source_icon" : "${widget.publisherImage}",
+                       "source_name" : "${widget.publisherName}",
+                       "pubDate" : "${widget.time}",
+                       "title" : "${widget.title}",
+                       "description" : "${widget.subTitle}",
+                     });
                    }, icon: Icon(Icons.bookmark,color: Colors.white,size: 30,)),
                  )
                ],

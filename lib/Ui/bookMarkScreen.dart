@@ -45,7 +45,7 @@ class bookmarkScreen extends StatelessWidget{
                           CustomText(text: "${mData['title']}",fontSize: 17,fontWeight: FontWeight.bold,),
                         ],
                       ),
-                      subtitle:  CustomText(text: "${mData['pubDate']}".substring(0,12),fontSize: 16,color: Colors.grey.shade700,fontWeight: FontWeight.bold,),
+                      subtitle:  CustomText(text: "${mData['pubDate']}".substring(0,11),fontSize: 16,color: Colors.grey.shade700,fontWeight: FontWeight.bold,),
                     );
                   }) :Container(child: Center(
                 child: CustomText(text: "No Bookmarks") ,
